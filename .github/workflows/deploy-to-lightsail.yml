@@ -1,0 +1,39 @@
+name: Deploy to Lightsail
+on:
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 2.7
+    - name: Install dependencies
+      run: |
+        gem install bundler
+        bundle install
+    - name: Build Jekyll site
+      run: |
+        bundle exec jekyll build
+    - name: Deploy _site folder to Lightsail
+      env:
+        PRIVATE_KEY: ${{ secrets.DEPLOY_KEY }}
+        SERVER_IP: ${{ secrets.SERVER_IP }}
+        DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
+      run: |
+        # Install the OpenSSH client
+        sudo apt-get install openssh-client
+        mkdir -p ~/.ssh/
+        # Save the private key to a temporary file
+        echo "$PRIVATE_KEY" > ../private_key.pem
+        chmod 600 ../private_key.pem
+        # Use SCP to copy the _site folder to your Lightsail instance
+        scp -o StrictHostKeyChecking=no -i ../private_key.pem -r _site/* $DEPLOY_USER@$SERVER_IP:$DEPLOY_PATH
+        # Remove the private_key.pem file
+        rm -f ../private_key.pem
