@@ -18,12 +18,12 @@ timezone: Asia/Shanghai
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Thomas Wilde Tech # the main title
+title: Thomas Wilde Music # the main title
 
-tagline: Breaking down programming topics # it will display as the sub-title
+tagline: Learning Piano Optimally # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
-  Documentation and tutorials of important full stack development topics
+  Piano blogging and tutorials on how to approach difficult music
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: ""
@@ -38,7 +38,7 @@ social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
   name: Thomas Wilde
-  email: thomas@ThomasWildeTech.com # change to your email address
+  email: thomas@ThomasWildeMusic.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
     - https://twitter.com/username # change to your twitter homepage
